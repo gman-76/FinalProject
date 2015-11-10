@@ -20,10 +20,10 @@ import java.io.IOException;
  */
 public class GCE extends AsyncTask<Void,Void,String> {
     private static MyApi myApiService = null;
-    private Context mContext;
+    private GCEListener gceListener;
 
-    public GCE(Context context) {
-        mContext = context;
+    public GCE(GCEListener listener) {
+        gceListener = listener;
     }
 
     @Override
@@ -54,10 +54,8 @@ public class GCE extends AsyncTask<Void,Void,String> {
 
     @Override
     protected void onPostExecute(String s) {
-        super.onPostExecute(s);
         Log.d("GCERETURN","Received response from GCE");
-        Intent i = new Intent(mContext, MainJokeActivity.class);
-        i.putExtra(MainJokeActivityFragment.INTENT_EXTRA_JOKE,s);
-        mContext.startActivity(i);
+        super.onPostExecute(s);
+        gceListener.callComplete(s);
     }
 }

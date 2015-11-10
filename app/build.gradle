@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
         minSdkVersion 14
@@ -14,13 +13,28 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
+    }
+    productFlavors {
+        free {
+            minSdkVersion 14
+            applicationId 'com.udacity.gradle.builditbigger.free'
+            targetSdkVersion 23
+        }
+        paid {
+            minSdkVersion 14
+            applicationId 'com.udacity.gradle.builditbigger.paid'
+            targetSdkVersion 23
+        }
+    }
+    dependencies{
+        freeCompile 'com.google.android.gms:play-services:8.1.0'
     }
 }
 
@@ -29,6 +43,5 @@ dependencies {
     // Added for AdMob
     compile project(':jokeactivity')
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.google.android.gms:play-services:8.1.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
 }

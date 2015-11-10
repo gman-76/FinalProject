@@ -17,3 +17,9 @@ allprojects {
         jcenter()
     }
 }
+
+apply plugin:'java'
+
+task TestGCE {
+    dependsOn ':backend:appengineFunctionalTest'
+}
