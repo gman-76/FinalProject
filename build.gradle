@@ -18,8 +18,8 @@ allprojects {
     }
 }
 
-apply plugin:'java'
-
 task TestGCE {
-    dependsOn ':backend:appengineFunctionalTest'
+    dependsOn ':backend:appengineRun'
+    dependsOn ':app:connectedAndroidTest'
+    dependsOn ':backend:appengineStop'
 }
